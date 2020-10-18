@@ -7,16 +7,14 @@ import Radium, {StyleRoot} from 'radium';
 import SSQform from './SSQforms/SSQform';
 import {BrowserRouter,Route} from 'react-router-dom';
 import fire from './section/Auth/firebaseConfig';
-import createBrowserHistory from 'history/createBrowserHistory'
+
 
 
 class App extends Component {
   constructor(props){
-    super(props);
-    const newHistory = createBrowserHistory();
-    
+    super(props);    
     this.state = {
-      user:{},
+      user:null,
     fileNoPassed:false,
     databaseKey:"",
   institutionDetails:{}  

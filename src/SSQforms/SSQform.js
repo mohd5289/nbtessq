@@ -33,7 +33,7 @@ this.Table14Title ='Office Accommodation'
 this.Table15Title ='Teaching Staff'
 this.Table16Title ='Service Staff'
 this.Table17Title ='List all full time Technologicians/Technicians available exclusively for the Programme'
-this.Table18Title ='All administratve staff in the department in order seniority'
+this.Table18Title ='All administrative staff in the department in order seniority'
 this.state={
     submitted:false,
     pageNumber:1,          
@@ -44,6 +44,10 @@ this.state={
     TitleOfTheChiefExecutive:'',
     NameOfTheHeadOfDepartment:'',
     TitleOfTheHeadOfDepartment:'',
+    FileOfDepartmentalOrganizationalStructure:null,
+    LetterOfApprovalFromTheMinistry:null,
+    FileForTheTeachingDepartmentalCurriculum:null,
+    BriefCurriculumForStudentsEnrollment:'',
     table1Rows :[],
     table1Data:[],
     table2Data:[],
@@ -78,13 +82,14 @@ this.state={
     table17Rows:[],
     table18Data:[],
     table18Rows:[],
-    LibraryInformation:'',
+    LibraryInformation:null,
     ProgrammeReadiness:'',
     NameOfTheOfficerCompletingTheQuestionnaire:'',
     DesignationOfTheOfficerCompletingTheQuestionnaire:'',
     MobilePhoneNumber:'',
 }    
 }
+
 sendDataToServer=(pageNumber)=>{
     switch(pageNumber){
     case 1:
@@ -98,10 +103,10 @@ sendDataToServer=(pageNumber)=>{
                             TitleOfTheChiefExecutive:this.state.TitleOfTheChiefExecutive,
                             NameOfTheHeadOfDepartment:this.state.NameOfTheHeadOfDepartment,
                              TitleOfTheHeadOfDepartment:this.state.TitleOfTheHeadOfDepartment}),
-headers:{"Content-type":"applicaton/json; charset=UTF-8"}
+                            headers:{"Content-type":"applicaton/json; charset=UTF-8"}
                             })
     .then(response=>{
-console.log(response.json().then(data=>{
+ console.log(response.json().then(data=>{
     console.log(data)
 }))
     })
@@ -115,104 +120,121 @@ break;
 default:
 
 }
-
 }
-handleChange=(e)=>{
-  
-        switch(e.target.TableNumber){
-        case (1):   
-      var  table1Clone = _.cloneDeep(this.state.table1Data);
-        table1Clone[e.target.row][e.target.column]= e.target.value;
-        this.setState({table1Data:table1Clone});
+ handleChange=(row, column, tableNumber)=>(e)=>{  
+        switch(tableNumber){
+        case 1:   
+       var  table1Clone = _.cloneDeep(this.state.table1Data); 
+       var pair={ [column] : e.target.value };
+       _.merge(table1Clone[row] , pair);
+       this.setState({table1Data:table1Clone});
+        console.log(this.state.table1Data);
         break;
-        case(2):
+        case 2:
         var table2Clone = _.cloneDeep(this.state.table2Data);
-        table2Clone[e.target.row][e.target.column]= e.target.value;
+         pair={ [column] : e.target.value };
+       _.merge(table2Clone[row] , pair);
         this.setState({table2Data:table2Clone});
         break;
-        case(3):
+        case 3:
         var table3Clone = _.cloneDeep(this.state.table3Data);
-        table3Clone[e.target.row][e.target.column]= e.target.value;
+         pair={ [column] : e.target.value };
+        _.merge(table3Clone[row] , pair);
         this.setState({table3Data:table3Clone});
         break;
-        case (4):
+        case 4:
         var table4Clone = _.cloneDeep(this.state.table4Data);
-        table4Clone[e.target.row][e.target.column]= e.target.value;
+        pair={ [column] : e.target.value };
+        _.merge(table4Clone[row] , pair);
         this.setState({table4Data:table4Clone});
         break;
-        case (5):
+        case 5:
             var table5Clone = _.cloneDeep(this.state.table5Data);
-            table5Clone[e.target.row][e.target.column]= e.target.value;
+             pair={ [column] : e.target.value };
+            _.merge(table5Clone[row] , pair);
             this.setState({table5Data:table5Clone});
             break;
-            case (6):
+            case 6:
             var table6Clone = _.cloneDeep(this.state.table6Data);
-            table6Clone[e.target.row][e.target.column]= e.target.value;
+             pair={ [column] : e.target.value };
+            _.merge(table6Clone[row] , pair);
             this.setState({table6Data:table5Clone});
             break;
-            case (7):
+            case  7:
             var table7Clone = _.cloneDeep(this.state.table7Data);
-            table7Clone[e.target.row][e.target.column]= e.target.value;
+             pair={ [column] : e.target.value };
+            _.merge(table7Clone[row] , pair);
             this.setState({table7Data:table7Clone});
             break;
-            case (8):
+            case 8:
             var table8Clone = _.cloneDeep(this.state.table8Data);
-            table8Clone[e.target.row][e.target.column]= e.target.value;
+             pair={ [column] : e.target.value };
+            _.merge(table8Clone[row] , pair);
             this.setState({table8Data:table8Clone});
             break;
-            case (9):
+            case 9:
             var table9Clone = _.cloneDeep(this.state.table9Data);
-            table9Clone[e.target.row][e.target.column]= e.target.value;
+             pair={ [column] : e.target.value };
+            _.merge(table9Clone[row] , pair);
             this.setState({table9Data:table9Clone});
             break;
-            case (10):
+            case 10:
             var table10Clone = _.cloneDeep(this.state.table10Data);
-            table10Clone[e.target.row][e.target.column]= e.target.value;
+             pair={ [column] : e.target.value };
+            _.merge(table10Clone[row] , pair);
             this.setState({table10Data:table10Clone});
             break;
-            case (11):
+            case 11:
             var table11Clone = _.cloneDeep(this.state.table11Data);
-            table11Clone[e.target.row][e.target.column]= e.target.value;
+            pair={ [column] : e.target.value };
+            _.merge(table11Clone[row] , pair);
             this.setState({table11Data:table11Clone});
             break;
-            case (12):
+            case 12:
             var table12Clone = _.cloneDeep(this.state.table12Data);
-            table12Clone[e.target.row][e.target.column]= e.target.value;
+            pair={ [column] : e.target.value };
+            _.merge(table12Clone[row] , pair);
             this.setState({table12Data:table12Clone});
             break;
-            case (13):
+            case 13:
             var table13Clone = _.cloneDeep(this.state.table13Data);
-            table13Clone[e.target.row][e.target.column]= e.target.value;
+            pair={ [column] : e.target.value };
+            _.merge(table13Clone[row] , pair);
             this.setState({table13Data:table13Clone});
             break;
-            case (14):
+            case 14:
             var table14Clone = _.cloneDeep(this.state.table14Data);
-            table14Clone[e.target.row][e.target.column]= e.target.value;
+            pair={ [column] : e.target.value };
+            _.merge(table14Clone[row] , pair);
             this.setState({table14Data:table14Clone});
             break;
-            case (15):
+            case 15:
             var table15Clone = _.cloneDeep(this.state.table15Data);
-            table15Clone[e.target.row][e.target.column]= e.target.value;
+            pair={ [column] : e.target.value };
+            _.merge(table15Clone[row] , pair);
             this.setState({table15Data:table15Clone});
             break;
-            case (16):
+            case 16:
             var table16Clone = _.cloneDeep(this.state.table16Data);
-            table16Clone[e.target.row][e.target.column]= e.target.value;
+            pair={ [column] : e.target.value };
+            _.merge(table16Clone[row] , pair);
             this.setState({table16Data:table16Clone});
             break;        
-            case (17):
+            case 17:
             var table17Clone = _.cloneDeep(this.state.table17Data);
-            table17Clone[e.target.row][e.target.column]= e.target.value;
+            pair={ [column] : e.target.value };
+            _.merge(table17Clone[row] , pair);
             this.setState({table17Data:table17Clone});
             break;
-            case (18):
+            case 18:
             var table18Clone = _.cloneDeep(this.state.table18Data);
-            table18Clone[e.target.row][e.target.column]= e.target.value;
+            pair={ [column] : e.target.value };
+            _.merge(table17Clone[row] , pair);
             this.setState({table18Data:table18Clone});
          break;
             default:
              table1Clone = _.cloneDeep(this.state.table1Data);
-            table1Clone[e.target.row][e.target.column]= e.target.value;
+          //  table1Clone[e.target.row][e.target.column]= e.target.value;
             this.setState({table1Data:table1Clone});
      }
      
@@ -220,7 +242,18 @@ handleChange=(e)=>{
 }
 
 
-
+onFileInputFieldChangedHandler=(number)=>(e)=>{
+switch(number){
+  case 1: this.setState({FileOfDepartmentalOrganizationalStructure:e.target.files});
+  break;
+  case 2: this.setState({LetterOfApprovalFromTheMinistry:e.target.files});
+    break;
+  case 3: this.setState({FileForTheTeachingDepartmentalCurriculum:e.target.files});
+    break;
+    default:
+      this.setState({FileOfDepartmentalOrganizationalStructure:e.target.files});
+}
+}
 onInputFieldChangedHandler=(number)=>(e)=>{
     switch(number){
         case 1:this.setState({ProgrammeTitle: e.target.value});
@@ -238,15 +271,23 @@ onInputFieldChangedHandler=(number)=>(e)=>{
         break;
         case 7: this.setState({TitleOfTheHeadOfDepartment: e.target.value});
         break;
-        case 8: this.setState({LibraryInformation:e.target.files});
+        case 8: this.setState({FileOfDepartmentalOrganizationalStructure:e.target.files});
         break;
-        case 9: this.setState({ProgrammeReadiness:e.target.value});
+        case 9:  this.setState({LetterOfApprovalFromTheMinistry:e.target.files});
         break;
-        case 10:this.setState({NameOfTheOfficerCompletingTheQuestionnaire:e.target.value});
+        case 10: this.setState({FileForTheTeachingDepartmentalCurriculum:e.target.files});
         break;
-        case 11: this.setState({DesignationOfTheOfficerCompletingTheQuestionnaire:e.target.value});
+        case 11: this.setState({BriefCurriculumForStudentsEnrollment:e.target.value});
         break;
-        case 12: this.setState({MobilePhoneNumber:e.target.value});
+        case 12: this.setState({LibraryInformation:e.target.files});
+        break;
+        case 13: this.setState({ProgrammeReadiness:e.target.value});
+        break;
+        case 14:this.setState({NameOfTheOfficerCompletingTheQuestionnaire:e.target.value});
+        break;
+        case 15: this.setState({DesignationOfTheOfficerCompletingTheQuestionnaire:e.target.value});
+        break;
+        case 16: this.setState({MobilePhoneNumber:e.target.value});
         break;
         default: this.setState({ProgrammeTitle: e.target.value});
 
@@ -264,11 +305,14 @@ initializeTable=(tableHeaderList,TableNumber)=>{
     }
   },{})
   console.log(rowData);
-  var tableRow = tableHeaderList.map((data)=>{
-      if(data==='id'){
+     var tableRow = tableHeaderList.map((data)=>{
+     //var dataIndex = tableHeaderList.findIndex(rank=> rank === data);  
+     //console.log(dataIndex);
+    if(data==='id'){
           return (<td key = {data}><input  value={rowData[data]} readOnly/></td>)
       }else{
-      return (<td key = {data}><input onChange = {this.handleChange} TableNumber={TableNumber} row = {rowData['id']} column ={data} columnLength={tableHeaderList.length }  /></td>);
+      
+        return (<td key = {data}><input onChange = {this.handleChange(rowData['id'] - 1, data, TableNumber)} TableNumber = {TableNumber} row = {rowData['id'] - 1} column ={data} columnLength={tableHeaderList.length} /></td>);
       }
       }
       )
@@ -501,7 +545,7 @@ this.selectTableToChangeState(TableNumber,newTableDataArray,newArray,'DEL');
 
 addRow=(tableHeaderList,TableNumber)=>(e)=>{
     e.preventDefault();
-    var Table =this.selectTable(TableNumber);
+    var Table = this.selectTable(TableNumber);
     var rowData = tableHeaderList.reduce((result,item)=>{
         if(item==='id'){ 
             console.log(Table[0]);
@@ -517,10 +561,12 @@ addRow=(tableHeaderList,TableNumber)=>(e)=>{
       console.log(rowData);
      
     var tableRow = tableHeaderList.map((data)=>{
+        var dataIndex = tableHeaderList.findIndex(rank=> rank === data);      
+    console.log(dataIndex);
         if(data==='id'){
             return (<td key = {data}><input  value={rowData[data]}  readOnly/></td>)
         }else{
-        return (<td key = {data}><input onChange = {this.handleChange} row = {rowData['id']}  column={data}  /></td>);
+        return (<td key = {data}><input onChange = {this.handleChange(rowData['id'] - 1, data, TableNumber)} row = {rowData['id'] - 1}  column={data}  TableNumber={TableNumber} columnLength={tableHeaderList.length }  /></td>);
         }
         }
         )
@@ -580,7 +626,8 @@ return(<div>
 <Route path="/SSQform1" render={()=> <SSQform1 nextPage= {this.moveToNextPage} 
                          table1Rows={this.state.table1Rows} table1Data={this.state.table1Data} 
                          addRow={this.addRow} deleteLastRow={this.deleteLastRow} 
-                         initializeTable ={this.initializeTable} captureInput = {this.onInputFieldChangedHandler}/>}/>
+                         initializeTable ={this.initializeTable} captureInput = {this.onInputFieldChangedHandler}
+                         captureFileInput={this.onFileInputFieldChangedHandler}/>}/>
 <Route path="/SSQform2" render={()=> <SSQform2 nextPage = {this.moveToNextPage} 
                                 table4Rows={this.state.table4Rows} table4Data={this.state.table4Data} 
                                 addRow={this.addRow} table5Rows={this.state.table5Rows} 
@@ -609,4 +656,4 @@ return(<div>
 
 }
 }
-export default _(SSQform);
+export default SSQform;
