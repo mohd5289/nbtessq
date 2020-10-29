@@ -44,7 +44,8 @@ const style ={
 <button type = "button" onClick = {this.Register} className = "toggle-btn" >Register</button>
 </div>
 <Login clicked = {this.state.loginClicked}></Login>
-<Register  checkFileNo ={this.props.checkFileNo}clicked = {this.state.registerClicked}></Register>
+<Register  checkFileNo ={this.props.checkFileNo}clicked = {this.state.registerClicked} errorMessage={this.props.errorMessage}
+startLoading ={this.props.startLoading} stopLoading={this.props.stopLoading}></Register>
 </div>);
 
 

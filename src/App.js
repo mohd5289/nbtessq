@@ -16,9 +16,11 @@ class App extends Component {
     this.state = {
       user:null,
     fileNoPassed:false,
+    fileRefNoFailed:false,
     databaseKey:"",
   institutionDetails:{}  
-  }
+
+}
   }
 
 checkFileRefNo=(fileRefNo)=>{
@@ -26,17 +28,20 @@ const fileRefNoRegex = /TEB\/PRO\/([SF]P\.\d+)/;
 const dotRegex = /\./;
 
 var match = fileRefNoRegex.exec(fileRefNo);
-console.log(match[1]);
-var dbkey = match[1].replace(dotRegex,"");
-this.setState({databaseKey:dbkey});
-console.log(this.state.databaseKey);
+
 if(match!=null){
   this.setState({fileNoPassed:true});
+  console.log(match[1]);
+  var dbkey = match[1].replace(dotRegex,"");
+  this.setState({databaseKey:dbkey});
+  console.log(this.state.databaseKey);
 }
 
 console.log(this.state.fileNoPassed);
 }
-
+resetFileNoFailed=()=>{
+  this.setState({fileRefNoFailed:false})
+}
 componentDidMount(){
   this.authListener();
   
@@ -61,6 +66,8 @@ console.log(response.json().then(data=>{
 
 }).catch(error=>{console.log(error)}
 )}else{
+  this.setState({fileRefNoFailed:true});
+  
   this.setState({user:null});
 }
    }else{
@@ -79,7 +86,7 @@ console.log(response.json().then(data=>{
    <Mast/>
     {this.state.user?(<Route path = "/" render= {(props)=><SSQform  {...props} databaseKey = {this.state.databaseKey} 
     institutionName = {this.state.institutionDetails['name']}/>}/>)
-    :(<Section   checkFileNo= {this.checkFileRefNo}/>)}
+    :(<Section   checkFileNo= {this.checkFileRefNo} fileNoFailed={this.state.fileRefNoFailed} resetFileNoFailed={this.resetFileNoFailed}/>)}
    <Footer/>
     </div>
     </StyleRoot>

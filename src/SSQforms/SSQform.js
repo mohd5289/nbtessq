@@ -626,8 +626,7 @@ return(<div>
 <Route path="/SSQform1" render={()=> <SSQform1 nextPage= {this.moveToNextPage} 
                          table1Rows={this.state.table1Rows} table1Data={this.state.table1Data} 
                          addRow={this.addRow} deleteLastRow={this.deleteLastRow} 
-                         initializeTable ={this.initializeTable} captureInput = {this.onInputFieldChangedHandler}
-                         captureFileInput={this.onFileInputFieldChangedHandler}/>}/>
+                         initializeTable ={this.initializeTable} captureInput = {this.onInputFieldChangedHandler}/>}/>
 <Route path="/SSQform2" render={()=> <SSQform2 nextPage = {this.moveToNextPage} 
                                 table4Rows={this.state.table4Rows} table4Data={this.state.table4Data} 
                                 addRow={this.addRow} table5Rows={this.state.table5Rows} 

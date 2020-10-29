@@ -11,16 +11,21 @@ constructor(props){
         email:"",
         password:"",
       fileRefNo:""
+      
     }
 
 }
+
 register=(e)=>{
     e.preventDefault();
+    this.props.startLoading();
     this.props.checkFileNo(this.state.fileRefNo);
     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
-
+        this.props.stopLoading();
     }).catch((error)=>{
-    console.log(error);
+        this.props.stopLoading();
+        console.log(error);
+  this.props.errorMessage(error,this.state.fileRefNo);
 });
 
 }
